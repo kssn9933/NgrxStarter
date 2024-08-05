@@ -1,0 +1,4 @@
+<div>
+    <button *ngIf="isCurrentRowEditing === true" (click)="onUpdate()">update</button>
+    <button *ngIf="isCurrentRowEditing === false" (click)="onEdit()">edit</button>
+</div>

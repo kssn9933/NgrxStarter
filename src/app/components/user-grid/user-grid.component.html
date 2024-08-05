@@ -1,0 +1,33 @@
+<form [formGroup]="userFormGroup">
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody formArrayName="userForms">
+            <tr *ngFor="let userForm of userForms.controls; let i = index" [formGroupName]="i">
+                <td><input formControlName="name" /></td>
+                <td><input formControlName="username" /></td>
+                <td><input formControlName="email" /></td>
+                <td>
+                    <button *ngIf="userForm.disabled" (click)="startEditing(i)">Edit</button>
+                    <button *ngIf="!userForm.disabled" (click)="saveEditing(i)">Save</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+
+
+
+<!-- <ag-grid-angular
+    style="width: 100%;"
+    class="ag-theme-alpine"
+    [gridOptions]="gridOptions"
+    [rowData]="users"
+    (gridReady)="onGridReady($event)">
+</ag-grid-angular> -->

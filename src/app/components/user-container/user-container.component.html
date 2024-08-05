@@ -1,0 +1,15 @@
+<h2>User List</h2>
+
+<app-user-grid 
+    [users]="(users$ | async) ?? []" 
+    (updateUser)="onUpdateUser($event)">
+</app-user-grid>
+
+
+
+<!-- AG grid implementation
+<app-user-grid 
+    [users]="(users$ | async) ?? []"
+    (editUser)="onEditUser($event)"
+    (updateUser)="onUpdateUser($event)">
+</app-user-grid> -->
