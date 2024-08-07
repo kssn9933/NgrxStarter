@@ -71,7 +71,21 @@ export const userReducer = createReducer(
     })),
     on(UserActions.patchUserFailure, (state, { error }) => ({
         ...state, error
-    }))
+    })),
+
+    on(UserActions.updateAllUsers, (state) => ({
+        ...state,
+        loading: true,
+        error: null
+    })),
+    on(UserActions.updateAllUsersSuccess, (state, { users }) => ({
+        ...adapter.addMany(users, { ...state, loading: false, error: null })
+    })),
+    on(UserActions.updateAllUsersFailure, (state, { error }) => ({
+        ...state,
+        loading: false,
+        error
+    })),
 );
 
 export const {

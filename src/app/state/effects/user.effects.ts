@@ -31,7 +31,8 @@ export class UserEffects {
             UserActions.loadUsersSuccess,
             UserActions.loadUserSuccess,
             UserActions.updateUserSuccess,
-            UserActions.patchUserSuccess
+            UserActions.patchUserSuccess,
+            UserActions.updateAllUsersSuccess
         ),
         tap(action => { // replace this with Toastr
             if (action.type === UserActions.loadUsersSuccess.type) {
@@ -42,6 +43,8 @@ export class UserEffects {
                 alert('User updated successfully');
             } else if (action.type === UserActions.patchUserSuccess.type) {
                 alert('User patch updated successfully');
+            } else if (action.type === UserActions.updateAllUsersSuccess.type) {
+                alert('User update all successful');
             }
         })
     ), { dispatch: false });
@@ -52,7 +55,8 @@ export class UserEffects {
             UserActions.loadUsersFailure,
             UserActions.loadUserFailure,
             UserActions.updateUserFailure,
-            UserActions.patchUserFailure
+            UserActions.patchUserFailure,
+            UserActions.updateAllUsersFailure
         ),
         tap(action => { // replace this with Toastr
             if (action.type === UserActions.loadUsersFailure.type) {
@@ -63,6 +67,8 @@ export class UserEffects {
                 alert('Failed to update user');
             } else if (action.type === UserActions.patchUserFailure.type) {
                 alert('Failed to patch update user');
+            } else if (action.type === UserActions.updateAllUsersFailure.type) {
+                alert('Failed to update all users');
             }
         })
     ), { dispatch: false });
@@ -108,6 +114,15 @@ export class UserEffects {
             .pipe(
                 map(user => UserActions.patchUserSuccess({ update: { id: user.id, changes: user } })),
                 catchError(error => of(UserActions.patchUserFailure({ error })))
+            ))
+    ));
+
+    updateAllUsers$ = createEffect(() => this.actions$.pipe(
+        ofType(UserActions.updateAllUsers),
+        mergeMap(action => this.userService.updateAllUsers(action.users)
+            .pipe(
+                map(users => UserActions.updateAllUsersSuccess({ users })),
+                catchError(error => of(UserActions.updateAllUsersFailure({ error })))
             ))
     ));
 }

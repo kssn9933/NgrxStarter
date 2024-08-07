@@ -5,7 +5,7 @@ import { GridOptions } from 'ag-grid-community';
 import { Store, select } from '@ngrx/store';
 
 import { selectAllUsers } from '../../../state/selectors/user.selectors';
-import { loadUsers, updateUser } from '../../../state/actions/user.actions';
+import { loadUsers, updateAllUsers, updateUser } from '../../../state/actions/user.actions';
 
 import { Observable } from 'rxjs';
 
@@ -28,5 +28,9 @@ export class UserContainerFacadeService {
 
   updateUser(user: User): void {
     this.store.dispatch(updateUser({ user }));
+  }
+
+  updateAllUsers(users: User[]): void {
+    this.store.dispatch(updateAllUsers({ users }));
   }
 }

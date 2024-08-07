@@ -38,6 +38,11 @@ export class UserContainerComponent implements OnInit {
     this.userContainerFacadeService.updateUser(user);
   }
 
+  onUpdateAllUsers(user: User[]): void {
+    this.userContainerFacadeService.updateAllUsers(user);
+  }
+
+
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();

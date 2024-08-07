@@ -1,3 +1,6 @@
+<button type="button" (click)="editAll()">Edit All</button>
+<button type="button" (click)="saveAll()">Save All</button>
+
 <form [formGroup]="userFormGroup">
     <table>
         <thead>
@@ -21,13 +24,3 @@
         </tbody>
     </table>
 </form>
-
-
-
-<!-- <ag-grid-angular
-    style="width: 100%;"
-    class="ag-theme-alpine"
-    [gridOptions]="gridOptions"
-    [rowData]="users"
-    (gridReady)="onGridReady($event)">
-</ag-grid-angular> -->

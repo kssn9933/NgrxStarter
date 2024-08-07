@@ -18,7 +18,11 @@ export enum UserActionTypes {
 
     PatchUser = '[User] Patch User',
     PatchUserSuccess = '[User] Patch User Success',
-    PatchUserFailure= '[User] Patch User Failure'
+    PatchUserFailure = '[User] Patch User Failure',
+
+    UpdateAllUsers = '[User] Update All Users',
+    UpdateAllUsersSuccess = '[User] Update All Users Success',
+    UpdateAllUsersFailure = '[User] Update All Users Failure',
 }
 
 // Load all users
@@ -79,5 +83,22 @@ export const patchUserSuccess = createAction(
 
 export const patchUserFailure = createAction(
     UserActionTypes.PatchUserFailure,
+    props<{ error: any }>()
+);
+
+
+// Update user POST
+export const updateAllUsers = createAction(
+    UserActionTypes.UpdateAllUsers,
+    props<{ users: User[] }>()
+);
+
+export const updateAllUsersSuccess = createAction(
+    UserActionTypes.UpdateAllUsersSuccess,
+    props<{ users: User[] }>()
+);
+
+export const updateAllUsersFailure = createAction(
+    UserActionTypes.UpdateAllUsersFailure,
     props<{ error: any }>()
 );

@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 import { User } from '../models/user.model';
 
+interface Payload {
+  [key: string]: User | number;
+  id: number;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +24,16 @@ export class UserService {
 
   getUserById(id: number): Observable<User> {
     return this.http.get<User>(`${this.apiUrl}/${id}`);
+  }
+  
+  updateAllUsers(users: User[]): Observable<User[]> {
+    return this.http.post<Payload>(`${this.apiUrl}`, users).pipe(
+      map(response => 
+        Object.entries(response)
+          .filter(([key]) => !isNaN(Number(key))) // Filter out non-numeric keys
+          .map(([key, user]) => ({ id: key, ...(user as User) })) // Add id to each user
+      )
+    );
   }
 
   updateUser(user: User): Observable<User> {
